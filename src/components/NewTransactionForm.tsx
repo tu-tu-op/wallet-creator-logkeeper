@@ -1,9 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import AddressInput from './AddressInput';
-import { generateWalletAddress, saveTransaction } from '@/utils/transactionUtils';
-import { useToast } from "@/components/ui/use-toast";
+import { generateWalletAddress, saveTransaction, calculateGasFee, isValidAddress } from '@/utils/transactionUtils';
+import { useToast } from "@/hooks/use-toast";
 import { blurIn, fadeIn } from '@/lib/animations';
 
 interface NewTransactionFormProps {
@@ -16,9 +16,19 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
   const [receiver, setReceiver] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [contractType, setContractType] = useState('normal');
+  const [estimatedGasFee, setEstimatedGasFee] = useState('0');
   const { toast } = useToast();
 
   const networks = ['Ethereum', 'Bitcoin', 'Polygon', 'Solana'];
+
+  // Update gas fee estimate when amount or contract type changes
+  useEffect(() => {
+    if (amount) {
+      setEstimatedGasFee(calculateGasFee(amount, contractType));
+    } else {
+      setEstimatedGasFee('0');
+    }
+  }, [amount, contractType]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +45,17 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
       return;
     }
 
+    // If receiver is provided but invalid, show error
+    if (receiver && !isValidAddress(receiver)) {
+      toast({
+        title: "Invalid address",
+        description: "The receiver address format is invalid",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
     // If receiver is empty, generate a new address
     const finalReceiver = receiver || generateWalletAddress(network);
 
@@ -45,7 +66,7 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
         receiver: finalReceiver,
         status: 'completed',
         networkType: network,
-        contractType: contractType,
+        contractType: contractType as 'normal' | 'efficient',
       });
 
       // Reset form
@@ -108,7 +129,7 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
         
         <AddressInput onAddressChange={setReceiver} />
         
-        <div className={fadeIn({ index: 2, className: "mb-6" })}>
+        <div className={fadeIn({ index: 2, className: "mb-4" })}>
           <label htmlFor="network" className="block text-sm font-medium text-gray-700 mb-1">
             Network
           </label>
@@ -122,6 +143,16 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
               <option key={net} value={net}>{net}</option>
             ))}
           </select>
+        </div>
+        
+        <div className={fadeIn({ index: 3, className: "mb-6 p-3 bg-gray-50 rounded-xl border border-gray-100" })}>
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-500">Estimated Gas Fee:</span>
+            <span className="text-sm font-medium">{estimatedGasFee} gwei</span>
+          </div>
+          <div className="text-xs text-gray-400 mt-1">
+            {contractType === 'efficient' ? 'Lower fees with efficient contract' : 'Standard gas fees'}
+          </div>
         </div>
         
         <button 

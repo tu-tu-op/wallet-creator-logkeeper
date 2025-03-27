@@ -11,8 +11,11 @@ const Index = () => {
 
   useEffect(() => {
     // Simulate loading transactions from log.txt
+    // In a real app, this would be an API call or file read
     const timer = setTimeout(() => {
-      setTransactions(generateMockTransactions());
+      const loadedTransactions = generateMockTransactions();
+      console.log('Loaded transactions from log.txt:', loadedTransactions);
+      setTransactions(loadedTransactions);
       setIsLoading(false);
     }, 800);
 
@@ -20,6 +23,8 @@ const Index = () => {
   }, []);
 
   const handleNewTransaction = (transaction: Transaction) => {
+    // In a real app, this would also append to log.txt
+    console.log('logTransaction called with:', transaction.receiver, transaction.amount, transaction.date);
     setTransactions([transaction, ...transactions]);
   };
 
