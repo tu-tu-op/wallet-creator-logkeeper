@@ -15,6 +15,7 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
   const [network, setNetwork] = useState('Ethereum');
   const [receiver, setReceiver] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [contractType, setContractType] = useState('normal');
   const { toast } = useToast();
 
   const networks = ['Ethereum', 'Bitcoin', 'Polygon', 'Solana'];
@@ -44,6 +45,7 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
         receiver: finalReceiver,
         status: 'completed',
         networkType: network,
+        contractType: contractType,
       });
 
       // Reset form
@@ -66,7 +68,22 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
 
   return (
     <form onSubmit={handleSubmit} className="mb-8">
-      <div className={blurIn({ index: 0, className: "wallet-card p-6" })}>
+      <div className={fadeIn({ index: 0, className: "wallet-card p-6 mb-4" })}>
+        <div className="wallet-segmented-control">
+          <div 
+            className={`wallet-segmented-option ${contractType === 'normal' ? 'active' : ''}`}
+            onClick={() => setContractType('normal')}
+          >
+            Normal
+          </div>
+          <div 
+            className={`wallet-segmented-option ${contractType === 'efficient' ? 'active' : ''}`}
+            onClick={() => setContractType('efficient')}
+          >
+            Efficient
+          </div>
+        </div>
+        
         <h2 className="text-xl font-semibold mb-4">New Transaction</h2>
         
         <div className={fadeIn({ index: 0, className: "mb-4" })}>

@@ -82,6 +82,44 @@
     @apply flex items-center justify-between p-4 my-2 rounded-xl bg-white
            border border-border shadow-sm hover:shadow-md transition-all;
   }
+  
+  .animated-gradient {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(100px);
+    opacity: 0.7;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .wallet-segmented-control {
+    @apply flex bg-background rounded-xl p-1 mb-4 border border-border;
+  }
+  
+  .wallet-segmented-option {
+    @apply flex-1 py-2 text-sm text-center rounded-lg cursor-pointer transition-all;
+  }
+  
+  .wallet-segmented-option.active {
+    @apply bg-wallet-accent text-white font-medium shadow-sm;
+  }
 }
 
 /* Custom scrollbar */
@@ -102,3 +140,4 @@
 .animate-in {
   animation-delay: calc(var(--index) * 0.05s);
 }
+

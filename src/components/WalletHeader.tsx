@@ -11,8 +11,8 @@ const WalletHeader: React.FC = () => {
           <Wallet className="text-white" size={24} />
         </div>
       </div>
-      <h1 className="text-3xl font-bold text-center mb-1">Web3 Wallet</h1>
-      <p className="text-wallet-muted text-center">Send crypto and manage your transactions</p>
+      <h1 className="text-3xl font-bold text-center mb-1 text-white drop-shadow-md">Web3 Wallet</h1>
+      <p className="text-white text-center opacity-90">Send crypto and manage your transactions</p>
     </div>
   );
 };
