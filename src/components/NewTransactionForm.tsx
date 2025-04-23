@@ -80,8 +80,8 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
 
   return (
     <form onSubmit={handleSubmit} className="mb-8">
-      <div className={fadeIn({ index: 0, className: "wallet-card p-6 mb-4" })}>
-        <div className="wallet-segmented-control relative">
+      <div className={fadeIn({ index: 0, className: "wallet-card p-6 mb-4 bg-wallet-gradient shadow-wallet-elegant" })}>
+        <div className={`wallet-segmented-control relative ${contractType === 'efficient' ? 'ring-2 ring-wallet-efficientOutline' : ''}`}>
           <div
             className={`wallet-segmented-option ${contractType === 'normal' ? 'active' : ''}`}
             onClick={() => setContractType('normal')}
@@ -89,20 +89,17 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
             Normal
           </div>
           <div
-            className={
-              `wallet-segmented-option` +
-              (contractType === 'efficient'
-                ? ' active efficient-selected bg-wallet-efficientBackground text-green-700'
-                : '')
-            }
+            className={`wallet-segmented-option ${contractType === 'efficient' ? 'active bg-wallet-efficientBackground text-green-700 border-wallet-efficientOutline' : ''}`}
             onClick={() => setContractType('efficient')}
             style={{
-              position: 'relative'
+              boxShadow: contractType === 'efficient'
+                ? '0 0 0 2px #4ADE80'
+                : undefined,
             }}
           >
             Efficient
             {contractType === 'efficient' && (
-              <span
+              <span 
                 className="ml-2 text-xs text-green-600 opacity-0"
                 data-percentage-comparison="true"
               >
