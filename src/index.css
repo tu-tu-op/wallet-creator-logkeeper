@@ -60,6 +60,12 @@
   .wallet-card:hover {
     @apply shadow-card-hover;
   }
+
+  .shadow-card-hover {
+    box-shadow: 
+      0 16px 30px 0 rgba(148, 97, 142, 0.22),  // Enhanced purple shadow
+      0 4px 10px 0 rgba(147, 97, 142, 0.14);   // Subtle additional shadow
+  }
   
   .wallet-button {
     @apply px-4 py-2 rounded-full bg-wallet-accent text-white font-medium
