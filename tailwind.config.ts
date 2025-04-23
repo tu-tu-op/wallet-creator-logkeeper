@@ -71,7 +71,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom palette from image
+				"grape": "#94618E",
+				"eggplant": "#49274A",
+				"sand": "#F4DECB",
+				"shell": "#F8EEE7",
+				wallet: {
+					light: "#F8EEE7",
+					accent: "#94618E",
+					accentLight: "#F4DECB",
+					surface: "#F4DECB", // softer sand
+					muted: "#8E9196",
+					efficientOutline: "#22c55e", // Green-500 from Tailwind
+					efficientBackground: "#F0FDF4",
+					cardShadow: "rgba(147, 97, 142, 0.14)", // grape shadow
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -118,17 +133,19 @@ export default {
 				'blur-in': 'blur-in 0.3s ease-out forwards',
 			},
 			boxShadow: {
-				'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.12)',
-				'card': '0 4px 12px rgba(0, 0, 0, 0.05)',
-				'card-hover': '0 8px 20px rgba(0, 0, 0, 0.08)',
-				'button': '0 2px 5px rgba(0, 0, 0, 0.1)',
-				'wallet-elegant': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+				glass: '0 8px 32px 0 rgba(31, 38, 135, 0.12)',
+				card: '0 4px 18px 0 var(--wallet-card-shadow, rgba(147,97,142,0.25))',
+				cardHover: '0 8px 24px 0 var(--wallet-card-shadow, rgba(147,97,142,0.33))',
+				button: '0 2px 5px rgba(148, 97, 142, 0.16)',
+				'wallet-elegant': '0 10px 28px -5px rgba(73,39,74,0.13), 0 10px 10px -5px rgba(244,222,203,0.08)'
 			},
 			backdropFilter: {
 				'glass': 'blur(10px)',
 			},
 			backgroundImage: {
-				'wallet-gradient': 'linear-gradient(135deg, #F5F7FA 0%, #F5F7FA 50%, #EEF1F5 100%)',
+				'wallet-gradient':
+					'linear-gradient(135deg, #94618E 0%, #49274A 48%, #F4DECB 99%)', 
+				'sand': 'linear-gradient(to bottom, #F8EEE7 0%, #F4DECB 100%)',
 			}
 		},
 	},

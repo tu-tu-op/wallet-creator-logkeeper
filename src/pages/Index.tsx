@@ -30,7 +30,8 @@ const Index = () => {
 
   return (
     <>
-      <div className="animated-gradient slow-gradient"></div>
+      {/* animated-gradient now hidden */}
+      <div className="fixed inset-0 -z-10 bg-sand"></div>
       <div className="relative min-h-screen z-10">
         <div className="container px-4 py-12 max-w-md mx-auto">
           <WalletHeader />
@@ -44,7 +45,10 @@ const Index = () => {
               <div className="wallet-card p-6">
                 <TransactionHistory transactions={transactions} />
               </div>
-              <ContractComparisonGraph transactions={transactions} />
+              {/* Comparison graph styled below history */}
+              <div className="comparison-card">
+                <ContractComparisonGraph transactions={transactions} />
+              </div>
             </>
           )}
           <footer className="mt-10 text-center text-xs text-wallet-muted">
@@ -58,4 +62,3 @@ const Index = () => {
 
 import ContractComparisonGraph from "@/components/ContractComparisonGraph";
 export default Index;
-

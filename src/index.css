@@ -133,3 +133,62 @@
 .animate-in {
   animation-delay: calc(var(--index) * 0.05s);
 }
+
+/* Improved purple/sand background */
+body {
+  @apply bg-[url('')] bg-sand text-foreground;
+  background: linear-gradient(135deg, #94618E 0%, #F4DECB 100%);
+  min-height: 100vh;
+}
+
+/* Remove previous animated gradient and blur */
+.animated-gradient {
+  display: none;
+}
+
+/* Improved wallet card style */
+.wallet-card {
+  @apply bg-white/75 rounded-2xl border border-wallet-accent shadow-card;
+  box-shadow: 0 8px 32px 0 rgba(148, 97, 142, 0.12);
+  background: linear-gradient(125deg, #F8EEE7 0%, #F4DECB 85%);
+}
+
+.wallet-card:hover {
+  box-shadow: 0 16px 30px 0 rgba(148, 97, 142, 0.22);
+}
+
+.wallet-segmented-control {
+  @apply flex bg-shell rounded-xl p-1 mb-4 border border-border;
+}
+
+.wallet-segmented-option {
+  @apply flex-1 py-2 text-sm text-center rounded-lg cursor-pointer transition-all;
+}
+
+.wallet-segmented-option.active {
+  @apply bg-grape text-white font-medium shadow-sm;
+  box-shadow: 0 0 0 2.5px #22c55e, 0 0 8px #94618E;
+}
+
+/* Stronger green/purple enchanting outline for efficient */
+.wallet-segmented-option.efficient-selected {
+  box-shadow: 0 0 0 4px #22c55e, 0 0 18px #94618E, 0 0 38px #49274A55;
+  border: 2.5px solid #22c55e !important;
+}
+
+/* Labels and Inputs */
+.wallet-input {
+  @apply w-full px-4 py-3 bg-background border border-border rounded-xl;
+  background: #F8EEE7;
+}
+
+/* Graph/Comparison Card */
+.comparison-card {
+  @apply wallet-card p-5 mt-6 mb-2;
+  background: linear-gradient(129deg, #F8EEE7 35%, #94618E20 100%);
+  border: 2px solid #94618E11;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #94618E22;
+}
