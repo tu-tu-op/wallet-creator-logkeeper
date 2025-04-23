@@ -1,9 +1,10 @@
-
 /* Improved purple/sand background */
 body {
   @apply bg-[url('')] text-foreground;
   background-color: #27295b;
+  background: linear-gradient(135deg, #27295b 0%, #1f2250 100%);
   min-height: 100vh;
+  background-attachment: fixed; // Ensures gradient covers entire viewport
 }
 
 /* Update segmented control styles */
