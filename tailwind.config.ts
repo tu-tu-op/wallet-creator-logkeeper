@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -31,8 +32,6 @@ export default {
 					accentLight: '#93C5FD',
 					muted: '#8E9196',
 					surface: 'rgba(255, 255, 255, 0.8)',
-					efficientOutline: '#4ADE80',
-					efficientBackground: '#F0FDF4',
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -122,14 +121,10 @@ export default {
 				'card': '0 4px 12px rgba(0, 0, 0, 0.05)',
 				'card-hover': '0 8px 20px rgba(0, 0, 0, 0.08)',
 				'button': '0 2px 5px rgba(0, 0, 0, 0.1)',
-				'wallet-elegant': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
 			},
 			backdropFilter: {
 				'glass': 'blur(10px)',
 			},
-			backgroundImage: {
-				'wallet-gradient': 'linear-gradient(135deg, #F5F7FA 0%, #F5F7FA 50%, #EEF1F5 100%)',
-			}
 		},
 	},
 	plugins: [require("tailwindcss-animate")],
