@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import AddressInput from './AddressInput';
@@ -21,7 +20,6 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
 
   const networks = ['Ethereum', 'Bitcoin', 'Polygon', 'Solana'];
 
-  // Update gas fee estimate when amount or contract type changes
   useEffect(() => {
     if (amount) {
       setEstimatedGasFee(calculateGasFee(amount, contractType));
@@ -34,7 +32,6 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Validate input
     if (!amount || parseFloat(amount) <= 0) {
       toast({
         title: "Invalid amount",
@@ -45,7 +42,6 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
       return;
     }
 
-    // If receiver is provided but invalid, show error
     if (receiver && !isValidAddress(receiver)) {
       toast({
         title: "Invalid address",
@@ -56,10 +52,8 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
       return;
     }
 
-    // If receiver is empty, generate a new address
     const finalReceiver = receiver || generateWalletAddress(network);
 
-    // Create transaction object
     setTimeout(() => {
       const transaction = saveTransaction({
         amount,
@@ -69,11 +63,9 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
         contractType: contractType as 'normal' | 'efficient',
       });
 
-      // Reset form
       setAmount('');
       setReceiver('');
       
-      // Show success toast
       toast({
         title: "Transaction successful",
         description: receiver 
@@ -81,25 +73,32 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
           : `Sent ${amount} to newly generated address`,
       });
       
-      // Call the callback with the new transaction
       onTransactionComplete(transaction);
       setIsSubmitting(false);
-    }, 1500); // Simulate network delay
+    }, 1500);
   };
 
   return (
     <form onSubmit={handleSubmit} className="mb-8">
       <div className={fadeIn({ index: 0, className: "wallet-card p-6 mb-4" })}>
-        <div className="wallet-segmented-control">
-          <div 
+        <div className="wallet-segmented-control relative">
+          <div
             className={`wallet-segmented-option ${contractType === 'normal' ? 'active' : ''}`}
             onClick={() => setContractType('normal')}
           >
             Normal
           </div>
-          <div 
-            className={`wallet-segmented-option ${contractType === 'efficient' ? 'active' : ''}`}
+          <div
+            className={`wallet-segmented-option relative transition-all duration-200 
+              ${contractType === 'efficient' ? 'active ring-2 ring-green-300 ring-offset-2 !border-green-400' : ''}`}
+            style={{
+              boxShadow: contractType === 'efficient'
+                ? '0 0 0 2px #C5F2C7'
+                : undefined,
+            }}
             onClick={() => setContractType('efficient')}
+            onMouseEnter={() => {/* Placeholder for percent comparison effect */}}
+            onMouseLeave={() => {/* Placeholder for percent comparison effect */}}
           >
             Efficient
           </div>
