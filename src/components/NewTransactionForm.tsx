@@ -80,8 +80,8 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
 
   return (
     <form onSubmit={handleSubmit} className="mb-8">
-      <div className={fadeIn({ index: 0, className: "wallet-card p-6 mb-4" })}>
-        <div className="wallet-segmented-control relative">
+      <div className={fadeIn({ index: 0, className: "wallet-card p-6 mb-4 bg-wallet-gradient shadow-wallet-elegant" })}>
+        <div className={`wallet-segmented-control relative ${contractType === 'efficient' ? 'ring-2 ring-wallet-efficientOutline' : ''}`}>
           <div
             className={`wallet-segmented-option ${contractType === 'normal' ? 'active' : ''}`}
             onClick={() => setContractType('normal')}
@@ -89,18 +89,23 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
             Normal
           </div>
           <div
-            className={`wallet-segmented-option relative transition-all duration-200 
-              ${contractType === 'efficient' ? 'active ring-2 ring-green-300 ring-offset-2 !border-green-400' : ''}`}
+            className={`wallet-segmented-option ${contractType === 'efficient' ? 'active bg-wallet-efficientBackground text-green-700 border-wallet-efficientOutline' : ''}`}
+            onClick={() => setContractType('efficient')}
             style={{
               boxShadow: contractType === 'efficient'
-                ? '0 0 0 2px #C5F2C7'
+                ? '0 0 0 2px #4ADE80'
                 : undefined,
             }}
-            onClick={() => setContractType('efficient')}
-            onMouseEnter={() => {/* Placeholder for percent comparison effect */}}
-            onMouseLeave={() => {/* Placeholder for percent comparison effect */}}
           >
             Efficient
+            {contractType === 'efficient' && (
+              <span 
+                className="ml-2 text-xs text-green-600 opacity-0"
+                data-percentage-comparison="true"
+              >
+                {/* Placeholder for percentage comparison */}
+              </span>
+            )}
           </div>
         </div>
         
