@@ -1,18 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  @apply bg-[url('')] text-foreground;
-  background-color: #27295b;
-  background: linear-gradient(135deg, #27295b 0%, #1f2250 100%);
-  min-height: 100vh;
-  background-attachment: fixed; /* Ensures gradient covers entire viewport */
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83% 53.3%;
+
+    --radius: 1rem;
+  }
 }
 
-/* Update segmented control styles */
-.wallet-segmented-option.active {
-  @apply bg-grape text-white font-medium;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
 
-.wallet-segmented-option.efficient-selected {
-  box-shadow: 0 0 0 1.5px #22c55e, 0 0 6px #94618E;
-  border: 1.5px solid #22c55e !important;
+@layer components {
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-glass;
+  }
+  
+  .wallet-card {
+    @apply bg-wallet-surface rounded-2xl backdrop-blur-xl border border-white/20 
+           shadow-card transition-all duration-300 ease-in-out;
+  }
+  
+  .wallet-card:hover {
+    @apply shadow-card-hover;
+  }
+  
+  .wallet-button {
+    @apply px-4 py-2 rounded-full bg-wallet-accent text-white font-medium
+           shadow-button transition-all duration-200 hover:bg-opacity-90 
+           active:translate-y-0.5 active:shadow-none;
+  }
+  
+  .subtle-button {
+    @apply px-4 py-2 rounded-full bg-secondary text-foreground font-medium
+           transition-all duration-200 hover:bg-secondary/80;
+  }
+  
+  .wallet-input {
+    @apply w-full px-4 py-3 bg-background border border-border rounded-xl
+           focus:outline-none focus:ring-2 focus:ring-wallet-accent/30 transition-all;
+  }
+  
+  .transaction-card {
+    @apply flex items-center justify-between p-4 my-2 rounded-xl bg-white
+           border border-border shadow-sm hover:shadow-md transition-all;
+  }
+  
+  .animated-gradient {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 45s ease infinite;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(100px);
+    opacity: 0.7;
+  }
+  
+  .slow-gradient {
+    animation-duration: 45s !important;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .wallet-segmented-control {
+    @apply flex bg-background rounded-xl p-1 mb-4 border border-border;
+  }
+  
+  .wallet-segmented-option {
+    @apply flex-1 py-2 text-sm text-center rounded-lg cursor-pointer transition-all;
+  }
+  
+  .wallet-segmented-option.active {
+    @apply bg-wallet-accent text-white font-medium shadow-sm;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+/* Animations */
+.animate-in {
+  animation-delay: calc(var(--index) * 0.05s);
 }
