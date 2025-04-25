@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import AddressInput from './AddressInput';
@@ -81,7 +82,7 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
   return (
     <form onSubmit={handleSubmit} className="mb-8">
       <div className={fadeIn({ index: 0, className: "wallet-card p-6 mb-4" })}>
-        <div className="wallet-segmented-control relative">
+        <div className="wallet-segmented-control relative w-1/2 mx-auto mb-6">
           <div
             className={`wallet-segmented-option ${contractType === 'normal' ? 'active' : ''}`}
             onClick={() => setContractType('normal')}
@@ -97,46 +98,48 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
                 : undefined,
             }}
             onClick={() => setContractType('efficient')}
-            onMouseEnter={() => {/* Placeholder for percent comparison effect */}}
-            onMouseLeave={() => {/* Placeholder for percent comparison effect */}}
           >
             Efficient
           </div>
         </div>
         
-        <h2 className="text-xl font-semibold mb-4">New Transaction</h2>
+        <h2 className="text-xl font-semibold mb-4 font-playfair">New Transaction</h2>
         
-        <div className={fadeIn({ index: 0, className: "mb-4" })}>
-          <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
-            Amount
-          </label>
-          <div className="wallet-input flex items-center">
-            <input
-              id="amount"
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="0.00"
-              step="0.01"
-              min="0"
-              className="flex-1 bg-transparent outline-none"
-              required
-            />
-            <span className="text-wallet-muted">ETH</span>
+        <div className="grid grid-cols-2 gap-4">
+          <div className={fadeIn({ index: 0 })}>
+            <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1 font-playfair">
+              Amount
+            </label>
+            <div className="wallet-input flex items-center">
+              <input
+                id="amount"
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="0.00"
+                step="0.01"
+                min="0"
+                className="flex-1 bg-transparent outline-none font-playfair"
+                required
+              />
+              <span className="text-wallet-muted font-playfair">ETH</span>
+            </div>
+          </div>
+          
+          <div className={fadeIn({ index: 1 })}>
+            <AddressInput onAddressChange={setReceiver} />
           </div>
         </div>
         
-        <AddressInput onAddressChange={setReceiver} />
-        
-        <div className={fadeIn({ index: 2, className: "mb-4" })}>
-          <label htmlFor="network" className="block text-sm font-medium text-gray-700 mb-1">
+        <div className={fadeIn({ index: 2 })}>
+          <label htmlFor="network" className="block text-sm font-medium text-gray-700 mb-1 font-playfair">
             Network
           </label>
           <select
             id="network"
             value={network}
             onChange={(e) => setNetwork(e.target.value)}
-            className="wallet-input w-full"
+            className="wallet-input w-full font-playfair"
           >
             {networks.map((net) => (
               <option key={net} value={net}>{net}</option>
@@ -146,17 +149,17 @@ const NewTransactionForm: React.FC<NewTransactionFormProps> = ({ onTransactionCo
         
         <div className={fadeIn({ index: 3, className: "mb-6 p-3 bg-gray-50 rounded-xl border border-gray-100" })}>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-500">Estimated Gas Fee:</span>
-            <span className="text-sm font-medium">{estimatedGasFee} gwei</span>
+            <span className="text-sm text-gray-500 font-playfair">Estimated Gas Fee:</span>
+            <span className="text-sm font-medium font-playfair">{estimatedGasFee} gwei</span>
           </div>
-          <div className="text-xs text-gray-400 mt-1">
+          <div className="text-xs text-gray-400 mt-1 font-playfair">
             {contractType === 'efficient' ? 'Lower fees with efficient contract' : 'Standard gas fees'}
           </div>
         </div>
         
         <button 
           type="submit" 
-          className={`wallet-button w-full flex items-center justify-center ${
+          className={`wallet-button w-full flex items-center justify-center bg-purple-600 hover:bg-purple-700 font-playfair ${
             isSubmitting ? 'opacity-80 cursor-not-allowed' : ''
           }`}
           disabled={isSubmitting}
