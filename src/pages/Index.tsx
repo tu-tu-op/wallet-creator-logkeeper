@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import WalletHeader from '@/components/WalletHeader';
 import NewTransactionForm from '@/components/NewTransactionForm';
@@ -10,8 +9,6 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading transactions from log.txt
-    // In a real app, this would be an API call or file read
     const timer = setTimeout(() => {
       const loadedTransactions = generateMockTransactions();
       console.log('Loaded transactions from log.txt:', loadedTransactions);
@@ -23,7 +20,6 @@ const Index = () => {
   }, []);
 
   const handleNewTransaction = (transaction: Transaction) => {
-    // In a real app, this would also append to log.txt
     console.log('logTransaction called with:', transaction.receiver, transaction.amount, transaction.date);
     setTransactions([transaction, ...transactions]);
   };
@@ -32,16 +28,16 @@ const Index = () => {
     <>
       <div className="animated-gradient slow-gradient"></div>
       <div className="relative min-h-screen z-10">
-        <div className="container px-4 py-12 max-w-md mx-auto">
+        <div className="container mx-auto px-4 py-12 w-[70%]">
           <WalletHeader />
           <NewTransactionForm onTransactionComplete={handleNewTransaction} />
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center h-40 wallet-card p-6 animate-pulse-subtle">
+            <div className="flex flex-col items-center justify-center h-40 wallet-card p-6 animate-pulse-subtle rounded-2xl">
               <p className="text-wallet-muted">Loading transaction history...</p>
             </div>
           ) : (
             <>
-              <div className="wallet-card p-6">
+              <div className="wallet-card p-6 rounded-2xl">
                 <TransactionHistory transactions={transactions} />
               </div>
               <ContractComparisonGraph transactions={transactions} />
@@ -58,4 +54,3 @@ const Index = () => {
 
 import ContractComparisonGraph from "@/components/ContractComparisonGraph";
 export default Index;
-
