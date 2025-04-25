@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -123,9 +124,6 @@ export default {
 			},
 			backdropFilter: {
 				'glass': 'blur(10px)',
-			},
-			fontFamily: {
-				'playfair': ['Playfair Display', 'serif'],
 			},
 		},
 	},
