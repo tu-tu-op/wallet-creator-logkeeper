@@ -4,43 +4,33 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 221.2 83% 53.3%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83% 53.3%;
-
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
     --radius: 1rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border selection:bg-white/10 selection:text-white;
   }
-
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -49,11 +39,11 @@
 
 @layer components {
   .glass-panel {
-    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-glass;
+    @apply bg-wallet-surface backdrop-blur-lg border border-white/10 shadow-glass;
   }
   
   .wallet-card {
-    @apply bg-wallet-surface rounded-2xl backdrop-blur-xl border border-white/20 
+    @apply bg-wallet-surface rounded-2xl backdrop-blur-xl border border-white/10 
            shadow-card transition-all duration-300 ease-in-out;
   }
   
@@ -68,22 +58,23 @@
   }
   
   .subtle-button {
-    @apply px-4 py-2 rounded-full bg-secondary text-foreground font-medium
-           transition-all duration-200 hover:bg-secondary/80;
+    @apply px-4 py-2 rounded-full bg-wallet-dark text-foreground font-medium
+           transition-all duration-200 hover:bg-opacity-80;
   }
   
   .wallet-input {
-    @apply w-full px-4 py-3 bg-background border border-border rounded-xl
-           focus:outline-none focus:ring-2 focus:ring-wallet-accent/30 transition-all;
+    @apply w-full px-4 py-3 bg-wallet-dark/50 border border-white/10 rounded-xl
+           focus:outline-none focus:ring-2 focus:ring-wallet-accent/30 transition-all
+           text-white placeholder:text-gray-400;
   }
   
   .transaction-card {
-    @apply flex items-center justify-between p-4 my-2 rounded-xl bg-white
-           border border-border shadow-sm hover:shadow-md transition-all;
+    @apply flex items-center justify-between p-4 my-2 rounded-xl bg-wallet-dark/70
+           border border-white/10 shadow-sm hover:shadow-md transition-all;
   }
   
   .animated-gradient {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(-45deg, #1A1F2C, #2A2D3E, #1E293B, #0F172A);
     background-size: 400% 400%;
     animation: gradient 45s ease infinite;
     position: fixed;
@@ -92,7 +83,6 @@
     right: 0;
     bottom: 0;
     z-index: -1;
-    filter: blur(100px);
     opacity: 0.7;
   }
   
